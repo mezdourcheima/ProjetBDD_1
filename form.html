@@ -5,17 +5,19 @@
 </head>
 <body>
 <!--====form section start====-->
-<div class="ouvrier-detail">
+<div >
     <h2>Create User Data</h2>
-    <form action="/users/create" method="POST">
-          <label>Full Name</label>
-          <input type="text" placeholder="Enter Full Name" name="fullName" required>
+    <form action="/Submit" method="POST">
+          <label>idOuvrier</label> 
+          <input type="number" placeholder="Enter your id" id="idOuvrier" name="idOuvrier" > 
+          <label>NomOuvrier</label>
+          <input type="text" placeholder="Enter PrenomOuvrier" name="NomOuvrier" required>
+          <label>PrenomOuvrier</label>
+          <input type="text" placeholder="Enter PrenomOuvrier" name="PrenomOuvrier" required>
           <label>Email Address</label>
-          <input type="email" placeholder="Enter Email Address" name="emailAddress" required>
-          <label>City</label>
-          <input type="city" placeholder="Enter Full City" name="city" required>
-          <label>Country</label>
-          <input type="text" placeholder="Enter Full Country" name="country" required>
+          <input type="email" placeholder="Enter Email Address" name="EmailOuvrier" required>
+          <label>phone</label>
+          <input type="phone number" placeholder="Enter your phone number" name="TelephoneOuv" required>
           <button type="submit">Submit</button>
         </div>
 </div>

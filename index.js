@@ -1,6 +1,9 @@
 const express = require('express');
 const mysql = require('mysql');
+const app = express();
+ 
 
+app.set('')
 // Create connection
 const db = mysql.createConnection({
     host : 'localhost',
@@ -16,8 +19,6 @@ db.connect(err => {
     }
     console.log('Mysql Conncected');
 });
-
-const app = express();
 
 //Create DATABASE
 app.get('/createdb', (req,res) => {
@@ -62,7 +63,7 @@ app.get('/createTaches', (req,res) => {
 });
 //Create table Ouvriers
 app.get('/createOuvriers', (req,res) => {
-    let sql = "CREATE TABLE OUVRIERS (idOuvrier INT ,NomOuvrier VARCHAR(255) , PrenomOuvrier VARCHAR(255) , EmailOuvrier VARCHAR(255) , TelephoneOuv VARCHAR(255))";
+    let sql = "CREATE TABLE OUVRIERS (idOuvrier INT , NomOuvrier VARCHAR(255) , PrenomOuvrier VARCHAR(255) , EmailOuvrier VARCHAR(255) , TelephoneOuv VARCHAR(255))";
     db.query(sql , err => {
         if(err) {
             throw err;
@@ -90,6 +91,24 @@ app.get('/createSpecialites', (req,res) => {
         res.send('Table Specialites created');
     });
 });
+
+//
+app.get('/' , function(req,res){
+    res.sendFile('form.html' , {root:__dirname})
+});
+// insert new data
+app.post('/Submit', function(req, res) {
+    //console.log(req.body);
+   // insert user data into users table
+   var sql = "INSERT INTO OUVRIERS VALUES('"+ req.body.idOuvrier + "''"+ req.body.NomOuvrier + "' , '"+ req.body.PrenomOuvrier + "' , '"+ req.body.EmailOuvrier + "', '"+ req.body.TelephoneOuv + "')";
+   db.query(sql,function (err) { 
+       if (err) throw err;
+          res.render('form' , {title : 'Data Saved' ,
+          message: 'Data Saved successfully'
+         })
+         db.end();
+   });
+ }); 
 app.listen('5000',() => {
     console.log('server connected to port 5000');
 })
